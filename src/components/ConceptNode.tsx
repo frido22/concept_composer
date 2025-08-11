@@ -1,9 +1,9 @@
 import { memo } from 'react';
-import { Handle, Position, NodeProps } from '@xyflow/react';
+import { Handle, Position } from '@xyflow/react';
 import { ConceptNodeData, Action } from '../types';
 
-const ConceptNode = memo(({ data, selected }: NodeProps<ConceptNodeData>) => {
-  const { concept } = data;
+const ConceptNode = memo(({ data, selected }: any) => {
+  const { concept } = data as ConceptNodeData;
 
   const renderAction = (action: Action, index: number) => {
     const isQuery = action.kind === 'query';
@@ -60,7 +60,7 @@ const ConceptNode = memo(({ data, selected }: NodeProps<ConceptNodeData>) => {
       {concept.stateFields.length > 0 && (
         <div className="mb-3">
           <div className="text-sm font-medium mb-1">State:</div>
-          {concept.stateFields.map((field, index) => (
+          {concept.stateFields.map((field: any, index: number) => (
             <div key={index} className="text-xs text-gray-600">
               {field.name}: {field.type} {field.init && `= ${field.init}`}
             </div>

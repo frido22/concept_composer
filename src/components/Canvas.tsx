@@ -1,14 +1,14 @@
-import { useCallback, useMemo, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import {
   ReactFlow,
   MiniMap,
   Controls,
   Background,
+  BackgroundVariant,
   useNodesState,
   useEdgesState,
   addEdge,
   Connection,
-  Edge,
   NodeTypes,
   ReactFlowProvider,
   Node,
@@ -17,7 +17,7 @@ import '@xyflow/react/dist/style.css';
 
 import ConceptNode from './ConceptNode';
 import SyncNode from './SyncNode';
-import { ComposerNode, ComposerEdge, ConceptData, SyncData } from '../types';
+import { ComposerNode, ComposerEdge } from '../types';
 
 interface CanvasProps {
   initialNodes?: ComposerNode[];
@@ -35,12 +35,11 @@ const nodeTypes: NodeTypes = {
 const Canvas = ({ 
   initialNodes = [], 
   initialEdges = [], 
-  onNodesChange,
   onEdgesChange,
   onSelectionChange 
 }: CanvasProps) => {
-  const [nodes, setNodes, onNodesChangeHandler] = useNodesState<ComposerNode>([]);
-  const [edges, setEdges, onEdgesChangeHandler] = useEdgesState<ComposerEdge>([]);
+  const [nodes, setNodes, onNodesChangeHandler] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChangeHandler] = useEdgesState(initialEdges);
 
   // Update internal state when external state changes
   useEffect(() => {
@@ -103,7 +102,7 @@ const Canvas = ({
 
   const handleSelectionChange = useCallback(
     ({ nodes: selectedNodes }: { nodes: Node[] }) => {
-      onSelectionChange?.(selectedNodes as ComposerNode[]);
+      onSelectionChange?.(selectedNodes as any);
     },
     [onSelectionChange]
   );
@@ -111,20 +110,20 @@ const Canvas = ({
   return (
     <div className="w-full h-full">
       <ReactFlow
-        nodes={nodes}
+        nodes={nodes as any}
         edges={edges}
         onNodesChange={handleNodesChange}
         onEdgesChange={handleEdgesChange}
         onConnect={onConnect}
         onSelectionChange={handleSelectionChange}
-        isValidConnection={isValidConnection}
+        isValidConnection={isValidConnection as any}
         nodeTypes={nodeTypes}
         fitView
         attributionPosition="top-right"
       >
         <Controls />
         <MiniMap />
-        <Background variant="dots" gap={12} size={1} />
+        <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
       </ReactFlow>
     </div>
   );

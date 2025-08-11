@@ -37,11 +37,11 @@ const Palette = ({ onAddConcept, onAddSync, currentNodes = [] }: PaletteProps) =
   };
 
   // Check what's currently on canvas to show relevant sections
-  const hasBasicDemo = currentNodes.some((node: any) => 
-    node.data?.concept?.name === 'Button' || 
-    node.data?.concept?.name === 'Counter' || 
-    node.data?.concept?.name === 'Notification'
-  );
+  // const hasBasicDemo = currentNodes.some((node: any) => 
+  //   node.data?.concept?.name === 'Button' || 
+  //   node.data?.concept?.name === 'Counter' || 
+  //   node.data?.concept?.name === 'Notification'
+  // );
   
   const hasUrlDemo = currentNodes.some((node: any) => 
     node.data?.concept?.name === 'UrlShortening' || 

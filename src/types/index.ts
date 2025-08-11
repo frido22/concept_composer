@@ -63,11 +63,11 @@ export interface ComposerGraph {
   edges: GraphEdge[];
 }
 
-export interface ConceptNodeData {
+export interface ConceptNodeData extends Record<string, unknown> {
   concept: ConceptData;
 }
 
-export interface SyncNodeData {
+export interface SyncNodeData extends Record<string, unknown> {
   sync: SyncData;
 }
 

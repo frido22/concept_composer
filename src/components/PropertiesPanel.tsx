@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ComposerNode, ConceptData, SyncData, Action, StateField, ActionField, ActionPattern, WhereStep } from '../types';
+import { ComposerNode, ConceptData, SyncData, Action } from '../types';
 
 interface PropertiesPanelProps {
   selectedNodes: ComposerNode[];
@@ -153,7 +153,7 @@ interface ActionEditorProps {
   onRemove: () => void;
 }
 
-const ActionEditor = ({ action, onChange, onRemove }: ActionEditorProps) => {
+const ActionEditor = ({ action, onRemove }: ActionEditorProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const displayName = action.kind === 'query' ? action.name.replace(/^_/, '') : action.name;
